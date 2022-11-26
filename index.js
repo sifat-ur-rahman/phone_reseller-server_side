@@ -20,14 +20,13 @@ async function run(){
     try{
         const productCollection = client.db('phone').collection('product')
 
-        // app.get('/category/:id', async(req, res) =>{
-            
-        //     const id = req.params.id;
-        //     const filter = { "category-id" : parseInt(id) }
-            
-        //     const result = await productCollection.find(filter).toArray()
-        //     res.send(result)
-        // })
+
+        const bookingsCollection = client.db('phone').collection('bookings')
+
+
+        const usersCollection = client.db('phone').collection('users')
+
+       
 
         app.get('/category/:category', async(req, res) =>{
             
@@ -35,6 +34,19 @@ async function run(){
             const filter = { "category" : categoryName }
             
             const result = await productCollection.find(filter).toArray()
+            res.send(result)
+        })
+        app.post('/bookings', async(req, res) =>{
+            const booking = req.body 
+            console.log(booking);
+            const result = await bookingsCollection.insertOne(booking);
+            res.send(result)
+        })
+
+        app.post('/users', async(req, res) =>{
+            const user = req.body 
+            console.log(user);
+            const result = await usersCollection.insertOne(user);
             res.send(result)
         })
     }
