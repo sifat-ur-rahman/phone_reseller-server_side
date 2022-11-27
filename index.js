@@ -61,7 +61,14 @@ async function run(){
             const email = req.params.email
             const query = {email}
             const user = await usersCollection.findOne(query)
-            res.send({isBuyers: user?.role ===  'Buyer'})
+            res.send( {isBuyers: user?.role ===  'Buyer'})
+        })
+
+        app.get('/users/sellers/:email', async(req, res) =>{
+            const email = req.params.email
+            const query = {email}
+            const user = await usersCollection.findOne(query)
+            res.send({isSellers: user?.role ===  'Seller'})
         })
 
         app.get('/buyer', async(req, res)=>{
@@ -76,7 +83,12 @@ async function run(){
             res.send(users)
         })
 
-        
+        app.get('/bookings',  async(req, res) =>{
+            const email = req.query.email;
+            const query = {email: email}
+            const booking = await bookingsCollection.find(query).toArray()
+            res.send(booking)
+        })
     }
     finally{
 
