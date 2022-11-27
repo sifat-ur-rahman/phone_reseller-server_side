@@ -61,8 +61,22 @@ async function run(){
             const email = req.params.email
             const query = {email}
             const user = await usersCollection.findOne(query)
-            res.send({isAdmin: user?.role ===  'Buyer'})
+            res.send({isBuyers: user?.role ===  'Buyer'})
         })
+
+        app.get('/buyer', async(req, res)=>{
+            const query = {role : 'Buyer'}
+            const users = await usersCollection.find(query).toArray()
+            res.send(users)
+        })
+
+        app.get('/sellers', async(req, res)=>{
+            const query = {role : 'Seller'}
+            const users = await usersCollection.find(query).toArray()
+            res.send(users)
+        })
+
+        
     }
     finally{
 
