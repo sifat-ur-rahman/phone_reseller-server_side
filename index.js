@@ -45,7 +45,7 @@ async function run(){
 
         app.post('/users', async(req, res) =>{
             const user = req.body 
-            console.log(user);
+            // console.log(user);
             const result = await usersCollection.insertOne(user);
             res.send(result)
         })
@@ -89,6 +89,13 @@ async function run(){
             const booking = await bookingsCollection.find(query).toArray()
             res.send(booking)
         })
+
+        app.post('/products', async(req, res) =>{
+            const product = req.body 
+            console.log(product);
+            const result = await productCollection.insertOne(product)
+            res.send(result)
+        });
     }
     finally{
 
