@@ -84,6 +84,7 @@ async function run(){
             const result = await usersCollection.insertOne(user);
             res.send(result)
         })
+        // console.log();
 
         app.get('/users/admin/:email', async(req, res) =>{
             const email = req.params.email
